@@ -13,7 +13,6 @@ html, body {
     overflow: hidden;
     font-family: 'Segoe UI', sans-serif;
     background: #1a0010;
-    position: relative;
     color: white;
 }
 
@@ -75,64 +74,6 @@ button:hover { transform: scale(1.1); }
 }
 .gallery img:hover { transform: scale(1.05); }
 
-/* 3D Gift Box */
-.gift-container {
-  perspective: 800px;
-  margin-top: 30px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.box {
-  width: 150px;
-  height: 150px;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: rotateX(0deg) rotateY(0deg);
-  transition: transform 1s;
-}
-
-.box div {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  background: #ff4e88;
-  border: 2px solid #fff;
-}
-
-.lid {
-  top: -20px;
-  transform-origin: bottom;
-  height: 20px;
-  background: #ff8eb0;
-  z-index: 10;
-}
-
-.front { transform: translateZ(75px); }
-.back { transform: rotateY(180deg) translateZ(75px); }
-.left { transform: rotateY(-90deg) translateZ(75px); }
-.right { transform: rotateY(90deg) translateZ(75px); }
-.bottom { transform: rotateX(90deg) translateZ(75px); }
-
-.inside {
-  position: absolute;
-  top: 160px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  text-align: center;
-}
-
-.inside img {
-  width: 200px;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 0 15px pink;
-  margin-bottom: 10px;
-}
-
-.hidden { display: none; }
-
 /* Popup */
 #popup {
     position: fixed;
@@ -170,6 +111,58 @@ button:hover { transform: scale(1.1); }
 
 /* Typing effect */
 #typing { font-size:20px; text-align:center; max-width:80%; }
+
+/* 3D Gift Box container */
+.gift-container {
+  perspective: 800px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.box {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform 1s;
+}
+.box div {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: #ff4e88;
+  border: 2px solid #fff;
+}
+.lid {
+  top: -20px;
+  transform-origin: bottom;
+  height: 20px;
+  background: #ff8eb0;
+  z-index: 10;
+}
+.front { transform: translateZ(75px); }
+.back { transform: rotateY(180deg) translateZ(75px); }
+.left { transform: rotateY(-90deg) translateZ(75px); }
+.right { transform: rotateY(90deg) translateZ(75px); }
+.bottom { transform: rotateX(90deg) translateZ(75px); }
+.inside {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+}
+.inside img {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 15px pink;
+  margin-bottom: 10px;
+}
+.hidden { display: none; }
+
 </style>
 </head>
 <body>
@@ -184,7 +177,7 @@ button:hover { transform: scale(1.1); }
     <button onclick="goToPage(1)">Open for Maria ❤️</button>
 </div>
 
-<!-- Page 1: Her pictures + gift box -->
+<!-- Page 1: Her pictures + 3D gift box -->
 <div id="page1" class="page hidden">
     <h1>Our Sweet Memories 📸</h1>
     <div class="gallery">
@@ -244,6 +237,7 @@ button:hover { transform: scale(1.1); }
     <button onclick="closePopup()">Close</button>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/Tween.min.js"></script>
 <script>
 /* Floating hearts */
 function createHeart() {
@@ -317,10 +311,10 @@ const lid = document.querySelector('.lid');
 const inside = document.querySelector('.inside');
 
 document.querySelector('.gift-container').addEventListener('click', () => {
+  new TWEEN.Tween(lid.style)
+    .to({}, 0) // dummy tween for animation
   lid.style.transform = 'rotateX(-120deg)';
-  setTimeout(() => {
-    inside.classList.remove('hidden');
-  }, 800);
+  setTimeout(() => inside.classList.remove('hidden'), 800);
 });
 </script>
 
