@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Maria ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at top, #ff6b9c, #ff2e63, #1a0010);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Center container */
+.container {
+    position: relative;
+    top: 25vh;
+}
+
+/* Main title */
+h1 {
+    font-size: 42px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.8);
+    animation: fadeIn 3s ease-in-out;
+}
+
+/* typing text */
+#typing {
+    font-size: 24px;
+    margin-top: 20px;
+    min-height: 30px;
+}
+
+/* romantic button */
+button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: #ff2e63;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255,255,255,0.7);
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255,255,255,1);
+}
+
+/* hidden message */
+#message {
+    display: none;
+    font-size: 26px;
+    margin-top: 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* floating hearts */
+.heart {
+    position: absolute;
+    color: #ffccd5;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* fade animation */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Happy Valentine's Day Maria ❤️</h1>
+
+    <div id="typing"></div>
+
+    <button onclick="showLove()">Click here baby ❤️</button>
+
+    <div id="message">
+        You are my heart, my peace, my everything.  
+        I love you so much Maria.  
+        Forever yours, Ton ❤️
+    </div>
+</div>
+
+<!-- Music -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/GxldQ9eX2wo?autoplay=1&loop=1&playlist=GxldQ9eX2wo"
+frameborder="0"
+allow="autoplay">
+</iframe>
+
+<script>
+
+/* typing effect */
+const text = "Happy Valentines baby. Until I found you, my world became complete ❤️";
+let i = 0;
+
+function typeWriter() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+    }
+}
+
+typeWriter();
+
+/* show hidden message */
+function showLove() {
+    document.getElementById("message").style.display = "block";
+}
+
+/* floating hearts generator */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 25 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 4 + 4) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+}, 300);
+
+</script>
+
+</body>
+</html>
