@@ -75,6 +75,64 @@ button:hover { transform: scale(1.1); }
 }
 .gallery img:hover { transform: scale(1.05); }
 
+/* 3D Gift Box */
+.gift-container {
+  perspective: 800px;
+  margin-top: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.box {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg);
+  transition: transform 1s;
+}
+
+.box div {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: #ff4e88;
+  border: 2px solid #fff;
+}
+
+.lid {
+  top: -20px;
+  transform-origin: bottom;
+  height: 20px;
+  background: #ff8eb0;
+  z-index: 10;
+}
+
+.front { transform: translateZ(75px); }
+.back { transform: rotateY(180deg) translateZ(75px); }
+.left { transform: rotateY(-90deg) translateZ(75px); }
+.right { transform: rotateY(90deg) translateZ(75px); }
+.bottom { transform: rotateX(90deg) translateZ(75px); }
+
+.inside {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  text-align: center;
+}
+
+.inside img {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 15px pink;
+  margin-bottom: 10px;
+}
+
+.hidden { display: none; }
+
 /* Popup */
 #popup {
     position: fixed;
@@ -126,7 +184,7 @@ button:hover { transform: scale(1.1); }
     <button onclick="goToPage(1)">Open for Maria ❤️</button>
 </div>
 
-<!-- Page 1: Her pictures -->
+<!-- Page 1: Her pictures + gift box -->
 <div id="page1" class="page hidden">
     <h1>Our Sweet Memories 📸</h1>
     <div class="gallery">
@@ -134,6 +192,23 @@ button:hover { transform: scale(1.1); }
         <img src="placeholder2.jpg" onclick="openPopup(this.src)">
         <img src="placeholder3.jpg" onclick="openPopup(this.src)">
     </div>
+
+    <!-- 3D Gift Box -->
+    <div class="gift-container">
+        <div class="box">
+            <div class="lid"></div>
+            <div class="front"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="back"></div>
+            <div class="bottom"></div>
+        </div>
+        <div class="inside hidden">
+            <img src="placeholder-gift.jpg" alt="Maria" />
+            <p>Surprise! I love you ❤️</p>
+        </div>
+    </div>
+
     <button onclick="goToPage(2)">Next 🎮</button>
 </div>
 
@@ -170,8 +245,6 @@ button:hover { transform: scale(1.1); }
 </div>
 
 <script>
-let heartsInterval;
-
 /* Floating hearts */
 function createHeart() {
     const heart = document.createElement("div");
@@ -183,7 +256,7 @@ function createHeart() {
     document.body.appendChild(heart);
     setTimeout(() => heart.remove(), 8000);
 }
-heartsInterval = setInterval(createHeart, 400);
+setInterval(createHeart, 400);
 
 /* Popup */
 function openPopup(src){
@@ -237,6 +310,19 @@ function triggerFunny(type){
         alert("Haha! I love you Maria 😄❤️");
     }
 }
+
+/* 3D Gift Box */
+const box = document.querySelector('.box');
+const lid = document.querySelector('.lid');
+const inside = document.querySelector('.inside');
+
+document.querySelector('.gift-container').addEventListener('click', () => {
+  lid.style.transform = 'rotateX(-120deg)';
+  setTimeout(() => {
+    inside.classList.remove('hidden');
+  }, 800);
+});
 </script>
+
 </body>
 </html>
